@@ -1,0 +1,9 @@
+Amanda Duffy: Responsible for HTTP and Javascript development; participate in the discussion of database design.
+
+Guan-Wun Hao: Responsible for ER design and SQL conversion and improvement; write up the project proposal; participate in the discussion of app design. 
+
+Jiahao Pei:Responsible for drug info collection (download, parse and convert drug data from online sources to readable xml files); participate in the discussion of database design. 
+
+Chen Yang:Responsible for SQL improvement and testing; help in implementation of SQL into Javascript; participate in the discussion of database design and part of HTML and Javascript design.
+
+All have been working on the final report. Each responsible for the part we are most familiar with.
