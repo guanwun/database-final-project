@@ -1,0 +1,20 @@
+Our app is a hybrid app that is written in HTML5, JavaScript, and CSS, but compiled into an app using Adobe's PhoneGap.
+PhoneGap inserts a few of their own files, including cordova, when the app is compiled.
+These files allow it to behave as an app, accessing native features of the phone like notifications.
+
+The two main files are index.html and medapp.js. 
+
+index.html creates the html structure. 
+MedicationListTable is the table seen in the homescreen, which lists the medications along with buttons to view info, edit, and delete.
+AddMedicationWindow is a window that pops up when the + button is clicked, displaying a blank table for adding a new medication.
+EditMedicationWindow is similar to AddMedicationWindow, but it will fill in automatically with the existing prescriptions's information, and update that prescriptions's row.
+MedicationInfoWindow is a popup that displays all of the information about the given perscription.
+
+medapp.js is the main JavaScript file, where all of the behind-the-scenes work happens.
+It creates the database and tables (if they don't exist), runs the SQL commands to edit them, schedules notifications, etc.
+It begins by creating and filling the database tables, and initializing popups and buttons.
+fillDialog fills a popup with information from the database, and clear deletes it for a clean slate the next time a popup is opened.
+handleInput takes the information received in a popup window and decides what to do with it.
+addMedToDatabase, editMedInDatabase, and deleteMedFromDatabase are used to add, edit, and delete a prescription from the database.
+addMedToTable, editMedInTable, and deleteMedInTable are used to update the homescreen table that the user sees.
+addNewNotification, editNotification, and deleteNotifcation are used to add, edit, and delete notifications using PhoneGap's cordova.
