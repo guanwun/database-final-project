@@ -1,0 +1,174 @@
+--Users can choose to use their Google/Facebook account
+
+CREATE TABLE Users(
+  userName VARCHAR(20) NOT NULL PRIMARY KEY,
+  userPhone VARCHAR(15),
+  age INTEGER
+);
+CREATE TABLE
+
+CREATE TABLE Drugs(
+  drugID VARCHAR(7) NOT NULL PRIMARY KEY,
+  drugName VARCHAR(50) NOT NULL UNIQUE,
+  drugDescription character varying(5000),
+  toxicity character varying(7000)
+);
+CREATE TABLE
+
+CREATE TABLE Pharmacy(
+  pharmacyID VARCHAR(15) NOT NULL PRIMARY KEY,
+  pharmacyName VARCHAR(256) NOT NULL,
+  pharmacyPhone VARCHAR(15) NOT NULL,
+  address VARCHAR(256)
+);
+CREATE TABLE
+
+CREATE TABLE Prescription(
+  prescriptionNumber VARCHAR(20) NOT NULL PRIMARY KEY,
+  userName VARCHAR(20) NOT NULL REFERENCES Users(userName),
+  drugID VARCHAR(7) NOT NULL REFERENCES Drugs(drugID),
+  pharmacyID VARCHAR(15) NOT NULL REFERENCES Pharmacy(pharmacyID),
+  dose VARCHAR(10) NOT NULL,
+  time VARCHAR(256) NOT NULL,
+  refillDate DATE,
+  refillsLeft INTEGER
+);
+CREATE TABLE
+
+CREATE TABLE Interaction(
+  drugName VARCHAR(50) NOT NULL REFERENCES Drugs(drugName),
+  Interaction_drugName VARCHAR(50) NOT NULL REFERENCES Drugs(drugName),
+  PRIMARY KEY(drugName, Interaction_drugName),
+  interactionDescription character varying(5000)
+);
+CREATE TABLE
+
+CREATE TABLE DrugBrand(
+  brandName VARCHAR(50) NOT NULL PRIMARY KEY,
+  genericName VARCHAR(50) REFERENCES Drugs(drugName)
+);
+CREATE TABLE
+           
+INSERT INTO Users
+VALUES ('BobSmith123', '586-744-0877', '23');
+INSERT 0 1
+
+SELECT * FROM Users;
+  username   |  userphone   | age 
+-------------+--------------+-----
+ BobSmith123 | 586-744-0877 |  23
+(1 row)
+
+
+UPDATE Users
+SET userPhone = '984-904-3030'
+WHERE userName = 'BobSmith123';
+UPDATE 1
+
+SELECT * FROM Users;
+  username   |  userphone   | age 
+-------------+--------------+-----
+ BobSmith123 | 984-904-3030 |  23
+(1 row)
+
+
+INSERT INTO Drugs
+VALUES ('DB00001', 'Lepirudin', 'identical to natural hirudin', 'the risk of bleeding is increased');
+INSERT 0 1
+
+SELECT * FROM Drugs;
+ drugid  | drugname  |       drugdescription        |             toxicity              
+---------+-----------+------------------------------+-----------------------------------
+ DB00001 | Lepirudin | identical to natural hirudin | the risk of bleeding is increased
+(1 row)
+
+
+INSERT INTO Drugs
+VALUES ('DB00552', 'Caliby', 'identical to natural fever', 'the risk of coughing is increased');
+INSERT 0 1
+
+SELECT * FROM Drugs;
+ drugid  | drugname  |       drugdescription        |             toxicity              
+---------+-----------+------------------------------+-----------------------------------
+ DB00001 | Lepirudin | identical to natural hirudin | the risk of bleeding is increased
+ DB00552 | Caliby    | identical to natural fever   | the risk of coughing is increased
+(2 rows)
+
+
+INSERT INTO Drugs
+VALUES ('DB00002', 'Lep', 'identical to hirudin', 'the risk of bleeding is decreased');
+INSERT 0 1
+
+SELECT * FROM Drugs;
+ drugid  | drugname  |       drugdescription        |             toxicity              
+---------+-----------+------------------------------+-----------------------------------
+ DB00001 | Lepirudin | identical to natural hirudin | the risk of bleeding is increased
+ DB00552 | Caliby    | identical to natural fever   | the risk of coughing is increased
+ DB00002 | Lep       | identical to hirudin         | the risk of bleeding is decreased
+(3 rows)
+
+
+INSERT INTO Pharmacy
+VALUES ('1234', 'Rite Aid Durham', '555-555-5555', '12345 Main Street');
+INSERT 0 1
+
+SELECT * FROM Pharmacy;
+ pharmacyid |  pharmacyname   | pharmacyphone |      address      
+------------+-----------------+---------------+-------------------
+ 1234       | Rite Aid Durham | 555-555-5555  | 12345 Main Street
+(1 row)
+
+
+INSERT INTO Prescription
+VALUES ('1234-56789', 'BobSmith123', 'DB00001', '1234', '5mg', 'Everyday 09:00', '2015-10-15', '2');
+INSERT 0 1
+
+SELECT * FROM Prescription;
+ prescriptionnumber |  username   | drugid  | pharmacyid | dose |      time      | refilldate | refillsleft 
+--------------------+-------------+---------+------------+------+----------------+------------+-------------
+ 1234-56789         | BobSmith123 | DB00001 | 1234       | 5mg  | Everyday 09:00 | 2015-10-15 |           2
+(1 row)
+
+
+UPDATE Prescription
+SET dose = '10mg'
+WHERE prescriptionNumber = '1234-56789';
+UPDATE 1
+
+SELECT * FROM Prescription;
+ prescriptionnumber |  username   | drugid  | pharmacyid | dose |      time      | refilldate | refillsleft 
+--------------------+-------------+---------+------------+------+----------------+------------+-------------
+ 1234-56789         | BobSmith123 | DB00001 | 1234       | 10mg | Everyday 09:00 | 2015-10-15 |           2
+(1 row)
+
+
+INSERT INTO Interaction
+VALUES ('Lepirudin', 'Caliby', 'May diminish the therapeutic effect of Choline C 11');
+INSERT 0 1
+
+SELECT * FROM Interaction;
+ drugname  | interaction_drugname |               interactiondescription                
+-----------+----------------------+-----------------------------------------------------
+ Lepirudin | Caliby               | May diminish the therapeutic effect of Choline C 11
+(1 row)
+
+
+INSERT INTO DrugBrand
+
+VALUES ('lepricon', 'Lepirudin');
+INSERT 0 1
+
+INSERT INTO DrugBrand
+
+VALUES ('lexico', 'Lepirudin');
+INSERT 0 1
+
+SELECT * FROM DrugBrand;
+ brandname | genericname 
+-----------+-------------
+ lepricon  | Lepirudin
+ lexico    | Lepirudin
+(2 rows)
+
+
+
